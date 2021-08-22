@@ -36,6 +36,7 @@ SWAGGER_SETTINGS = {
     'JSON_EDITOR': True,
 }
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
