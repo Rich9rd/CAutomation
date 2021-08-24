@@ -46,7 +46,7 @@ urlpatterns = [
     path('workers/<int:pk>', WorkerUpdateView.as_view()),
     path('trucks/',TruckListView.as_view()),
     path('trucks/<int:pk>', TruckUpdateView.as_view()),
-    #path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('api/common/', include('common.urls', namespace='common')),
     re_path(r'rest-auth/', include('cleaning.auth_urls')),
 ]
