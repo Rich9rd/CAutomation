@@ -14,7 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import re_path, path, include
 from django.conf.urls import url
 from rest_framework import permissions
 from drf_yasg.views import get_schema_view
@@ -46,6 +46,7 @@ urlpatterns = [
     path('workers/<int:pk>', WorkerUpdateView.as_view()),
     path('trucks/',TruckListView.as_view()),
     path('trucks/<int:pk>', TruckUpdateView.as_view()),
-    path('admin/', admin.site.urls),
-    path('api/common/', include('common.urls', namespace='common'))
+    #path('admin/', admin.site.urls),
+    path('api/common/', include('common.urls', namespace='common')),
+    re_path(r'rest-auth/', include('cleaning.auth_urls')),
 ]

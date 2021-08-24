@@ -23,7 +23,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
-
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+AUTH_USER_MODEL = 'cleaning.User'
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'api_key': {
@@ -48,8 +49,18 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-REST_FRAMEWORK = { 'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema' }
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework.schemas.coreapi.AutoSchema',
+
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication',
+    ],
+    }
 # Application definition
+SITE_ID = 1
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -58,11 +69,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     'corsheaders',
-
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
     'drf_yasg',
     'rest_framework',
+    'rest_framework.authtoken',
+    'rest_auth.registration',
+    'rest_auth',
 
     'common.apps.CommonConfig',
     'cleaning.apps.CleaningConfig',
@@ -108,7 +125,7 @@ WSGI_APPLICATION = 'CAutomation.wsgi.application'
 
 DATABASES = {
     'default': dj_database_url.config(
-        default='postgres://mlgvvmtxfiwevn:841cfc0e7a7cfba2921648ac3f3e7a0035dc1ffb5842ce5929730fd38d26b420@ec2-54-220-170-192.eu-west-1.compute.amazonaws.com:5432/dbh4a40q9gm3kr'
+        default='postgres://mzqgdpoeqiolgg:270514539442574d87e9f9c742314e58d57ff59139679e5c6e46eff5482b5b6e@ec2-52-208-221-89.eu-west-1.compute.amazonaws.com:5432/d96ohaomhouuat'
     ),
 }
 

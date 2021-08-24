@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from cleaning.models import Point, Truck, Worker
+from cleaning.models import Point, Truck, User
 
 class PointSerializer(serializers.ModelSerializer):
     lng = serializers.RegexField(regex = '^-?[0-9]{3}\.[0-9]+$')
@@ -21,10 +21,10 @@ class TruckSerializer(serializers.ModelSerializer):
         read_only = ('registrationMark',)
 
 
-class WorkerSerializer(serializers.ModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     truck = TruckSerializer()
 
     class Meta:
-        model = Worker
-        fields = '__all__'
+        model = User
+        fields = ('__all__')
         read_only = ('name',)

@@ -3,6 +3,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 import re
 from django.core.exceptions import ValidationError
 
+from django.contrib.auth.models import AbstractUser
+
 class Point(models.Model):
     lat = models.DecimalField(
             'Широта',
@@ -68,8 +70,7 @@ class Truck(models.Model):
         verbose_name_plural = 'Мусоровозы'
 
 
-class Worker(models.Model):
-    id = models.AutoField(primary_key=True)
+class User(AbstractUser):
     name = models.CharField(
             'Имя',
             max_length=50
