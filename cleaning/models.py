@@ -71,15 +71,12 @@ class Truck(models.Model):
 
 
 class User(AbstractUser):
-    name = models.CharField(
-            'Имя',
-            max_length=50
-            )
     truck = models.ForeignKey(
             Truck,
             verbose_name = 'Обслуживаемые мусоровозы',
             on_delete = models.CASCADE,
-            default = 1
+            null = True,
+            blank = True,
             )
 
     def __str__(self):

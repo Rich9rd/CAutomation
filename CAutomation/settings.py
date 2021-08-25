@@ -24,7 +24,21 @@ STATICFILES_DIRS = (
     os.path.join(PROJECT_ROOT, 'static'),
 )
 ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_LOGOUT_ON_GET = False
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = "none"
+
 AUTH_USER_MODEL = 'cleaning.User'
+
+AUTHENTICATION_BACKENDS = (
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+    # `allauth` specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+ACCOUNT_CONFIRM_EMAIL_ON_GET = False
+
 SWAGGER_SETTINGS = {
     'SECURITY_DEFINITIONS': {
         'api_key': {
@@ -97,6 +111,8 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
 ]
 #'django.middleware.common.CommonMiddleware',
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #'corsheaders.middleware.CommonMiddleware',
 ROOT_URLCONF = 'CAutomation.urls'
