@@ -5,7 +5,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from cleaning.models import Point, Truck, User
 from cleaning.serializers import PointSerializer, TruckSerializer, UserSerializer
-
+from rest_framework.permissions import IsAuthenticated
 
 def confirm_email(request, key):
     email_confirmation = EmailConfirmationHMAC.from_key(key)
@@ -22,6 +22,7 @@ class PointListView(generics.ListAPIView):
 class PointUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Point.objects.all()
     serializer_class = PointSerializer
+    permission_classes = [IsAuthenticated]
 
 
 class TruckListView(generics.ListAPIView):
@@ -32,7 +33,7 @@ class TruckListView(generics.ListAPIView):
 class TruckUpdateView(generics.RetrieveUpdateAPIView):
     queryset = Truck.objects.all()
     serializer_class = TruckSerializer
-
+    permission_classes = [IsAuthenticated]
 
 class WorkerListView(generics.ListAPIView):
     queryset = User.objects.all()
@@ -42,3 +43,4 @@ class WorkerListView(generics.ListAPIView):
 class WorkerUpdateView(generics.RetrieveUpdateAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated]
